@@ -1,5 +1,5 @@
 """
-This program is use to interface HX711 with raspbery pi
+This program is use to interface loadcell with raspberry pi using HX711
 read HX711 data sheet for more information
 """
 
