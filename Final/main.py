@@ -3,7 +3,7 @@
 * Project: 	   		Farm Produce: Logging and Monitoring
 * Author: 			Bhavesh Jadav
 * Filename:    		main.py
-* Functions: 			init()
+* Functions: 		init()
 *					tare()
 *					calculateWeight()
 *					displayWeight()
@@ -82,9 +82,9 @@ lcd.lcd_init()
 '''
 *
 * Function Name: 	calculateWeight
-* Input: 				none
+* Input: 			none
 * Output: 			returns the calculated weight from the load cell value
-* Logic: 				1) take the reading from load cell
+* Logic: 			1) take the reading from load cell
 *					2) take the difference between current value and base value
 *					3) divide the difference with diference got with known weight
 *					4) finally multiply the division answer with known weight value to get the weight
@@ -108,9 +108,9 @@ def caculateWeight():
 '''
 *
 * Function Name: 	displayWeight
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				it displays weight on the lcd screen by using calculateWeight function
+* Logic: 			it displays weight on the lcd screen by using calculateWeight function
 * Example Call:		displayWeight()
 *
 '''
@@ -131,9 +131,9 @@ def displayWeight() :
 '''
 *
 * Function Name: 	tare
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				takes the current weight of the object and stores it in variable then it will be subtracted form current weight value
+* Logic: 			takes the current weight of the object and stores it in variable then it will be subtracted form current weight value
 * Example Call:		tare()
 *
 '''
@@ -150,9 +150,9 @@ def tare():
 '''
 *
 * Function Name: 	takePicture
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				takes picture using USB camera using fscam program
+* Logic: 			takes picture using USB camera using fscam program
 * Example Call:		takePicture()
 *
 '''
@@ -178,9 +178,9 @@ def takePicture():
 '''
 *
 * Function Name: 	storeData
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				stores the data into local database
+* Logic: 			stores the data into local database
 * Example Call:		storeData()
 *
 '''
@@ -214,9 +214,9 @@ def storeData():
 '''
 *
 * Function Name: 	fetchCropInfo
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				fetches the crop name and id from local database
+* Logic: 			fetches the crop name and id from local database
 * Example Call:		fetchCropInfo()
 *
 '''
@@ -262,9 +262,9 @@ def fetchCropInfo():
 '''
 *
 * Function Name: 	acceptCropID
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				accepts crop ID from user using keypad
+* Logic: 			accepts crop ID from user using keypad
 * Example Call:		acceptCropID()
 *
 '''
@@ -308,9 +308,9 @@ def acceptCropID():
 '''
 *
 * Function Name: 	fetchLocationInfo
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				fetches the location name and id from local database
+* Logic: 			fetches the location name and id from local database
 * Example Call:		fetchLocationInfo()
 *
 '''
@@ -358,9 +358,9 @@ def fetchLocationInfo():
 '''
 *
 * Function Name: 	acceptLocationID
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				accepts location ID from user using keypad
+* Logic: 			accepts location ID from user using keypad
 * Example Call:		acceptLocationID()
 *
 '''
@@ -404,9 +404,9 @@ def acceptLocationID():
 '''
 *
 * Function Name: 	fetchTroughInfo
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				fetches the trough name and id from local database
+* Logic: 			fetches the trough name and id from local database
 * Example Call:		fetchTroughInfo()
 *
 '''
@@ -448,9 +448,9 @@ def fetchTroughInfo():
 '''
 *
 * Function Name: 	acceptTroughID
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				accepts trough ID from user using keypad
+* Logic: 			accepts trough ID from user using keypad
 * Example Call:		acceptTroughID()
 *
 '''
@@ -494,9 +494,9 @@ def acceptTroughID():
 '''
 *
 * Function Name: 	fetchTroughInfoFromServer
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				fetches newly added or removed trough info from server database
+* Logic: 			fetches newly added or removed trough info from server database
 * Example Call:		fetchTroughInfoFromServer()
 *
 '''
@@ -562,9 +562,9 @@ def fetchTroughInfoFromServer():
 '''
 *
 * Function Name: 	fetchCropInfoFromServer
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				fetches the newly added or removed crop from server database
+* Logic: 			fetches the newly added or removed crop from server database
 * Example Call:		fetchCropInfoFromServer()
 *
 '''
@@ -632,9 +632,9 @@ def fetchCropInfoFromServer():
 '''
 *
 * Function Name: 	init
-* Input: 				none
+* Input: 			none
 * Output: 			none
-* Logic: 				calculates the baseValue of load cell and fetches the crop info from the server database
+* Logic: 			calculates the baseValue of load cell and fetches the crop info from the server database
 * Example Call:		init()
 *
 '''
