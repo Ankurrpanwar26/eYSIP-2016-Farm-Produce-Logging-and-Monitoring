@@ -1,31 +1,31 @@
 '''
 *
-* Project: 	   		Farm Produce: Logging and Monitoring
-* Author: 			Bhavesh Jadav
+* Project: 	   	Farm Produce: Logging and Monitoring
+* Author: 		Bhavesh Jadav
 * Filename:    		main.py
-* Functions: 			init()
-*					tare()
-*					calculateWeight()
-*					displayWeight()
-*					acceptCropID()
-*					acceptTroughID()
-*					fetchCropInfo()
-*					fetchCropInfoFromServer()
-*					takePicture()
-*					storedata()
+* Functions: 		init()
+*			tare()
+*			calculateWeight()
+*			displayWeight()
+*			acceptCropID()
+*			acceptTroughID()
+*			fetchCropInfo()
+*			fetchCropInfoFromServer()
+*			takePicture()
+*			storedata()
 * Global Variables:	baseValue
-*					taredWeight
-*					imgName
-*					measuredWeight
-*					DOUT
-*					toughID
-*					cropID
-*					cropName
-*					troughIDExcepted
-*					cropIDExcepted
-*					pictureTaken
-*					active
-* 					server
+*			taredWeight
+*			imgName
+*			measuredWeight
+*			DOUT
+*			toughID
+*			cropID
+*			cropName
+*			troughIDExcepted
+*			cropIDExcepted
+*			pictureTaken
+*			active
+* 			server
 *
 '''
 
@@ -75,12 +75,12 @@ lcd.lcd_init()
 '''
 *
 * Function Name: 	calculateWeight
-* Input: 				none
-* Output: 			returns the calculated weight from the load cell value
-* Logic: 				1) take the reading from load cell
-*					2) take the difference between current value and base value
-*					3) divide the difference with diference got with known weight
-*					4) finally multiply the division answer with known weight value to get the weight
+* Input: 		none
+* Output: 		returns the calculated weight from the load cell value
+* Logic: 		1) take the reading from load cell
+*			2) take the difference between current value and base value
+*			3) divide the difference with diference got with known weight
+*			4) finally multiply the division answer with known weight value to get the weight
 * Example Call:		calculateWeight()
 *
 '''
@@ -101,9 +101,9 @@ def caculateWeight():
 '''
 *
 * Function Name: 	displayWeight
-* Input: 				none
-* Output: 			none
-* Logic: 				it displays weight on the lcd screen by using calculateWeight function
+* Input: 		none
+* Output: 		none
+* Logic: 		it displays weight on the lcd screen by using calculateWeight function
 * Example Call:		displayWeight()
 *
 '''
@@ -124,9 +124,9 @@ def displayWeight() :
 '''
 *
 * Function Name: 	tare
-* Input: 				none
-* Output: 			none
-* Logic: 				takes the current weight of the object and stores it in variable then it will be subtracted form current weight value
+* Input: 		none
+* Output: 		none
+* Logic: 		takes the current weight of the object and stores it in variable then it will be subtracted form current weight value
 * Example Call:		tare()
 *
 '''
@@ -143,9 +143,9 @@ def tare():
 '''
 *
 * Function Name: 	takePicture
-* Input: 				none
-* Output: 			none
-* Logic: 				takes picture using USB camera using fscam program
+* Input: 		none
+* Output: 		none
+* Logic: 		takes picture using USB camera using fscam program
 * Example Call:		takePicture()
 *
 '''
@@ -171,9 +171,9 @@ def takePicture():
 '''
 *
 * Function Name: 	storeData
-* Input: 				none
-* Output: 			none
-* Logic: 				stores the data into local database
+* Input: 		none
+* Output: 		none
+* Logic: 		stores the data into local database
 * Example Call:		storeData()
 *
 '''
@@ -208,9 +208,9 @@ def storeData():
 '''
 *
 * Function Name: 	fetchCropInfo
-* Input: 				none
-* Output: 			none
-* Logic: 				fetches the crop name and id from local database
+* Input: 		none
+* Output: 		none
+* Logic: 		fetches the crop name and id from local database
 * Example Call:		fetchCropInfo()
 *
 '''
@@ -256,9 +256,9 @@ def fetchCropInfo():
 '''
 *
 * Function Name: 	acceptCropID
-* Input: 				none
-* Output: 			none
-* Logic: 				accepts crop ID from user using keypad
+* Input: 		none
+* Output: 		none
+* Logic: 		accepts crop ID from user using keypad
 * Example Call:		acceptCropID()
 *
 '''
@@ -302,9 +302,9 @@ def acceptCropID():
 '''
 *
 * Function Name: 	acceptTroughID
-* Input: 				none
-* Output: 			none
-* Logic: 				accepts trough ID from user using keypad
+* Input: 		none
+* Output: 		none
+* Logic: 		accepts trough ID from user using keypad
 * Example Call:		acceptTroughID()
 *
 '''
@@ -348,9 +348,9 @@ def acceptTroughID():
 '''
 *
 * Function Name: 	fetchCropInfoFromServer
-* Input: 				none
-* Output: 			none
-* Logic: 				fetches the newly added or removed crop from server database
+* Input: 		none
+* Output: 		none
+* Logic: 		fetches the newly added or removed crop from server database
 * Example Call:		fetchCropInfoFromServer()
 *
 '''
@@ -418,9 +418,9 @@ def fetchCropInfoFromServer():
 '''
 *
 * Function Name: 	init
-* Input: 				none
-* Output: 			none
-* Logic: 				calculates the baseValue of load cell and fetches the crop info from the server database
+* Input: 		none
+* Output: 		none
+* Logic: 		calculates the baseValue of load cell and fetches the crop info from the server database
 * Example Call:		init()
 *
 '''
