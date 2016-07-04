@@ -1,9 +1,9 @@
 '''
 *
-* Project: 	   		Farm Produce: Logging and Monitoring
-* Author: 			Bhavesh Jadav
+* Project: 	   	Farm Produce: Logging and Monitoring
+* Author: 		Bhavesh Jadav
 * Filename:    		send.py
-* Functions: 			None
+* Functions: 		None
 * Global Variables:	None
 *
 '''
