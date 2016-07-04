@@ -1,9 +1,9 @@
 '''
 *
-* Project: 	   		Farm Produce: Logging and Monitoring
-* Author: 			Bhavesh Jadav
+* Project: 	   	Farm Produce: Logging and Monitoring
+* Author: 		Bhavesh Jadav
 * Filename:    		loadcell.py
-* Functions: 			read_cell_value(), base_vaue(), read_average_value(sample)
+* Functions: 		read_cell_value(), base_vaue(), read_average_value(sample)
 * Global Variables:	SCK, DOUT, bits
 *
 '''
@@ -27,10 +27,10 @@ bits = [0 for i in range(24)]
 '''
 *
 * Function Name: 	read_cell_value
-* Input: 				none
-* Output: 			returns the calculated decimal value of the load cell reading
-* Logic: 				1) take bit by bit reading form HX711 module by sending clock pulses through SCK pin and store them in bits array
-*					2) convert this binary data into decimal and then return the decimal value
+* Input: 		none
+* Output: 		returns the calculated decimal value of the load cell reading
+* Logic:		1) take bit by bit reading form HX711 module by sending clock pulses through SCK pin and store them in bits array
+*			2) convert this binary data into decimal and then return the decimal value
 * Example Call:		read_cell_value()
 *
 '''
@@ -64,9 +64,9 @@ def read_cell_value() :
 '''
 *
 * Function Name: 	base_value
-* Input: 				none
-* Output: 			returns moving average value of the readings according to the number of samples defined
-* Logic: 				Use moving average method to with certain number of samples to caclulate the stable base value of load cell when no load is applied
+* Input: 		none
+* Output: 		returns moving average value of the readings according to the number of samples defined
+* Logic: 		Use moving average method to with certain number of samples to caclulate the stable base value of load cell when no load is applied
 * Example Call:		base_value()
 *
 '''
@@ -90,9 +90,9 @@ def base_value():
 '''
 *
 * Function Name: 	read_average_value
-* Input: 				sample: no. of values to considered for taking average value
-* Output: 			returns the calculated average value of the load cell reading
-* Logic: 				Use normal average method to calculate average
+* Input: 		sample: no. of values to considered for taking average value
+* Output: 		returns the calculated average value of the load cell reading
+* Logic: 		Use normal average method to calculate average
 * Example Call:		read_average_value(10)
 *
 '''
