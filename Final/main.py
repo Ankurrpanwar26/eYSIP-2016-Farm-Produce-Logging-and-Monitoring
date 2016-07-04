@@ -1,31 +1,35 @@
 '''
 *
-* Project: 	   	Farm Produce: Logging and Monitoring
-* Author: 		Bhavesh Jadav
+* Project: 	   		Farm Produce: Logging and Monitoring
+* Author: 			Bhavesh Jadav
 * Filename:    		main.py
-* Functions: 		init()
-*			tare()
-*			calculateWeight()
-*			displayWeight()
-*			acceptCropID()
-*			acceptTroughID()
-*			fetchCropInfo()
-*			fetchCropInfoFromServer()
-*			takePicture()
-*			storedata()
+* Functions: 			init()
+*					tare()
+*					calculateWeight()
+*					displayWeight()
+*					acceptCropID()
+*					acceptTroughID()
+*					acceptLocationID()
+*					fetchCropInfo()
+*					fetchCropInfoFromServer()
+*					fetchTroughInfoFromServer()
+*					takePicture()
+*					storedata()
 * Global Variables:	baseValue
-*			taredWeight
-*			imgName
-*			measuredWeight
-*			DOUT
-*			toughID
-*			cropID
-*			cropName
-*			troughIDExcepted
-*			cropIDExcepted
-*			pictureTaken
-*			active
-* 			server
+*					taredWeight
+*					imgName
+*					measuredWeight
+*					DOUT
+*					toughID
+*					cropID
+*					cropName
+*					locationName
+*					troughIDExcepted
+*					locationIDExcepted
+*					cropIDExcepted
+*					pictureTaken
+*					active
+* 					server
 *
 '''
 
@@ -47,19 +51,22 @@ LINE_3 = 0x94
 LINE_4 = 0xD4
 
 #change below variable with server IP
-server = "192.168.0.126"
+server = "169.254.48.23"
 
 baseValue = 0  #variable to store the base value of load cell
 taredWeight = 0  #variable to store tared weight
 imgName = 0  #variable to store image name
 measuredWeight = 0.0  #variable to store calculated weight
 DOUT = 22  #constant stores gpio pin used by dout pin of hx711. It will be used to check if hx711 is ready to send data or not
-toughID = ""  #variable to sotre trough ID
+troughID = ""  #variable to sotre trough ID
+locationID = "" #variable to sotre location ID
 cropID = ""  #variable to store crop ID
 cropName = ""  #variable to store crop name
+locationName = ""  #variable to store location name
 
 #Flag variables
 troughIDExcepted = 0  #to check if trough id is accepted or not
+locationIDExcepted = 0  #to check if location id is accepted or not
 cropIDExcepted = 0	#to check if crop id is accepted or not
 pictureTaken = 0	#to check if picture is taken or not
 active = 1	#to check if program is active or not
@@ -75,12 +82,12 @@ lcd.lcd_init()
 '''
 *
 * Function Name: 	calculateWeight
-* Input: 		none
-* Output: 		returns the calculated weight from the load cell value
-* Logic: 		1) take the reading from load cell
-*			2) take the difference between current value and base value
-*			3) divide the difference with diference got with known weight
-*			4) finally multiply the division answer with known weight value to get the weight
+* Input: 				none
+* Output: 			returns the calculated weight from the load cell value
+* Logic: 				1) take the reading from load cell
+*					2) take the difference between current value and base value
+*					3) divide the difference with diference got with known weight
+*					4) finally multiply the division answer with known weight value to get the weight
 * Example Call:		calculateWeight()
 *
 '''
@@ -101,9 +108,9 @@ def caculateWeight():
 '''
 *
 * Function Name: 	displayWeight
-* Input: 		none
-* Output: 		none
-* Logic: 		it displays weight on the lcd screen by using calculateWeight function
+* Input: 				none
+* Output: 			none
+* Logic: 				it displays weight on the lcd screen by using calculateWeight function
 * Example Call:		displayWeight()
 *
 '''
@@ -124,9 +131,9 @@ def displayWeight() :
 '''
 *
 * Function Name: 	tare
-* Input: 		none
-* Output: 		none
-* Logic: 		takes the current weight of the object and stores it in variable then it will be subtracted form current weight value
+* Input: 				none
+* Output: 			none
+* Logic: 				takes the current weight of the object and stores it in variable then it will be subtracted form current weight value
 * Example Call:		tare()
 *
 '''
@@ -143,9 +150,9 @@ def tare():
 '''
 *
 * Function Name: 	takePicture
-* Input: 		none
-* Output: 		none
-* Logic: 		takes picture using USB camera using fscam program
+* Input: 				none
+* Output: 			none
+* Logic: 				takes picture using USB camera using fscam program
 * Example Call:		takePicture()
 *
 '''
@@ -171,9 +178,9 @@ def takePicture():
 '''
 *
 * Function Name: 	storeData
-* Input: 		none
-* Output: 		none
-* Logic: 		stores the data into local database
+* Input: 				none
+* Output: 			none
+* Logic: 				stores the data into local database
 * Example Call:		storeData()
 *
 '''
@@ -189,8 +196,7 @@ def storeData():
 		cursor = db.cursor()
 		img_path = "./images/" + imgName
 		#insert values in database. isoformat() will give mysql compatible datetime object
-		cursor.execute("INSERT INTO data (troughid, cropid, name, date, weight, imagepath) VALUES (%s, %s, %s, %s, %s, %s)", (troughID, cropID, cropName, datetime.datetime.now().isoformat(), measuredWeight, img_path))
-		#cursor.execute("UPDATE oc_product SET quantity = quantity + %s WHERE product_id = %s", (measuredWeight, cropID))
+		cursor.execute("INSERT INTO data (troughid, cropid, name, date, weight, imagepath, location) VALUES (%s, %s, %s, %s, %s, %s, %s)", (troughID, cropID, cropName, datetime.datetime.now().isoformat(), measuredWeight, img_path, locationName))
 		db.commit()  #commit the changes
 		lcd.clear()
 		#lcd.string("Successfully stored", LINE_1)
@@ -208,9 +214,9 @@ def storeData():
 '''
 *
 * Function Name: 	fetchCropInfo
-* Input: 		none
-* Output: 		none
-* Logic: 		fetches the crop name and id from local database
+* Input: 				none
+* Output: 			none
+* Logic: 				fetches the crop name and id from local database
 * Example Call:		fetchCropInfo()
 *
 '''
@@ -256,9 +262,9 @@ def fetchCropInfo():
 '''
 *
 * Function Name: 	acceptCropID
-* Input: 		none
-* Output: 		none
-* Logic: 		accepts crop ID from user using keypad
+* Input: 				none
+* Output: 			none
+* Logic: 				accepts crop ID from user using keypad
 * Example Call:		acceptCropID()
 *
 '''
@@ -298,13 +304,153 @@ def acceptCropID():
 		key = ""
 	#after accepting crop ID fetch crop information from local database
 	fetchCropInfo()
+	
+'''
+*
+* Function Name: 	fetchLocationInfo
+* Input: 				none
+* Output: 			none
+* Logic: 				fetches the location name and id from local database
+* Example Call:		fetchLocationInfo()
+*
+'''
+def fetchLocationInfo():
+	"retrieves location info through locationid info"
+	global locationID
+	global locationName
+	global locationIDExcepted
+	try:
+		lcd.clear()
+		lcd.string("Fetching location info...", LINE_1)
+		#create instance of a database with host, username, password and database name
+		db = sqldb.connect("localhost", "root", "firebird", "maindb")
+		#create cursor object
+		cursor = db.cursor()
+		lid = int(locationID)  #convert accepted location id into integer
+		sql = "SELECT locationname FROM locationinfo WHERE locationid = %d" % (lid)
+		cursor.execute(sql)
+		data = cursor.fetchone()
+		#if there some location exists with this id
+		if data > 0:
+			locationName = data[0]  #then assigh locationname to variable
+			locationIDExcepted = 1	#set locationIDExcepted flag to one
+			#lcd.clear()
+			#lcd.string("Successfully fetched", LINE_1)
+			#lcd.string("location information", LINE_2)
+			#time.sleep(0.5)
+		else:  #if no location exists with entered ID
+			lcd.clear()
+			lcd.string("location ID does not", LINE_1)
+			lcd.string("exists!", LINE_2)
+			lcd.string("Enter valid location", LINE_3)
+			lcd.string("ID", LINE_4)
+			time.sleep(3)
+	except:  #if database connection Fails
+		lcd.clear()
+		lcd.string("      FAILED", LINE_1)
+		lcd.string("Unable to connect to", LINE_2)
+		lcd.string("local database", LINE_3)
+		lcd.string("Try again later", LINE_4)
+		time.sleep(3)
+	db.close()
+
+
+'''
+*
+* Function Name: 	acceptLocationID
+* Input: 				none
+* Output: 			none
+* Logic: 				accepts location ID from user using keypad
+* Example Call:		acceptLocationID()
+*
+'''
+def acceptLocationID():
+	"function to accept locationid through keypad"
+	global locationID
+	global locationIDExcepted
+	lcd.clear()
+	locationID = ""
+	key = ""
+	time.sleep(0.1)
+	lcd.string("Enter Location ID", LINE_1)
+	lcd.string("Press * to continue", LINE_2)
+	lcd.string("and # for backspace", LINE_3)
+	#loop until some location id is entered and * key is pressed. Following loop will only break when valid location ID is entered
+	while  key != "*":
+		lcd.string(locationID, LINE_4)
+		key = kpad.get_key()
+		if key == '*':
+			if len(locationID) <= 0:
+				lcd.clear()
+				lcd.string("Location ID can't", LINE_1)
+				lcd.string("be null", LINE_2)
+				time.sleep(3)
+				lcd.clear()
+				lcd.string("Enter Location ID", LINE_1)
+				lcd.string("Press * to continue", LINE_2)
+				lcd.string("and # for backspace", LINE_3)
+			else:
+				break
+		elif key == '#':  #for backspacing
+			if len(locationID) > 0:
+				locationID = locationID[:-1]
+		elif key.isdigit():
+			locationID += key
+			time.sleep(0.1)
+		key = ""
+	#after accepting locationID fetch location info from local database
+	fetchLocationInfo()
+
+'''
+*
+* Function Name: 	fetchTroughInfo
+* Input: 				none
+* Output: 			none
+* Logic: 				fetches the trough name and id from local database
+* Example Call:		fetchTroughInfo()
+*
+'''
+def fetchTroughInfo():
+	"checks id entered troughid is valid of not"
+	global troughID
+	global troughIDExcepted
+	try:
+		lcd.clear()
+		lcd.string("Fetching trough info...", LINE_1)
+		#create instance of a database with host, username, password and database name
+		db = sqldb.connect("localhost", "root", "firebird", "maindb")
+		#create cursor object
+		cursor = db.cursor()
+		tid = int(troughID)  #convert accepted trough id into integer
+		sql = "SELECT troughid FROM troughinfo WHERE troughid = %d" % (tid)
+		cursor.execute(sql)
+		data = cursor.fetchone()
+		#if entered trough ID is valid
+		if data > 0:
+			troughIDExcepted = 1	#set troughIDExcepted flag to one
+		else:  #if no trough id exists with entered ID
+			lcd.clear()
+			lcd.string("trough ID does not", LINE_1)
+			lcd.string("exists!", LINE_2)
+			lcd.string("Enter valid trough", LINE_3)
+			lcd.string("ID", LINE_4)
+			time.sleep(3)
+	except:  #if database connection Fails
+		lcd.clear()
+		lcd.string("      FAILED", LINE_1)
+		lcd.string("Unable to connect to", LINE_2)
+		lcd.string("local database", LINE_3)
+		lcd.string("Try again later", LINE_4)
+		time.sleep(3)
+	db.close()
+
 
 '''
 *
 * Function Name: 	acceptTroughID
-* Input: 		none
-* Output: 		none
-* Logic: 		accepts trough ID from user using keypad
+* Input: 				none
+* Output: 			none
+* Logic: 				accepts trough ID from user using keypad
 * Example Call:		acceptTroughID()
 *
 '''
@@ -342,15 +488,83 @@ def acceptTroughID():
 			troughID += key
 			time.sleep(0.1)
 		key = ""
-	#after accepting troughID set troughIDExcepted flag to 1
-	troughIDExcepted = 1
+	#check if entered trough ID is valid or not by fetching it from local database
+	fetchTroughInfo()
+
+'''
+*
+* Function Name: 	fetchTroughInfoFromServer
+* Input: 				none
+* Output: 			none
+* Logic: 				fetches newly added or removed trough info from server database
+* Example Call:		fetchTroughInfoFromServer()
+*
+'''
+def fetchTroughInfoFromServer():
+	"fetch newly added troughinfo such as id from the server"
+	updated = 0
+	removed = 0
+	lcd.clear()
+	lcd.string("      Welcome", LINE_1)
+	lcd.string("Fetching troughinfo...", LINE_2)
+	try:
+		lcd.string("Connect to database", LINE_3)
+		#connect to server database to fetch information
+		serverdb = sqldb.connect(host = server, user = "bhavesh", passwd = "123456789", db = "opencart", connect_timeout = 5)
+		#connect to local databse to store fetched information
+		localdb = sqldb.connect("localhost", "root", "firebird", "maindb")
+		serverc = serverdb.cursor()
+		localc = localdb.cursor()
+		lcd.string("     Connected", LINE_4)
+		serverc.execute("SELECT troughid FROM troughinfo")
+		result = serverc.fetchall()  #fetch all trough information form server database
+		for row in result:
+			localc.execute("SELECT * FROM troughinfo WHERE troughid = %s", (row[0]))  #fetch the trough info from local database with selected server trough id
+			count = localc.fetchall()
+			if len(count) == 0:  #if trough info does not exists in the server then count will be zero so add it in local database
+				localc.execute("INSERT INTO troughinfo(troughid) VALUES (%s)", (row[0]))
+				updated += 1
+
+		localc.execute( "SELECT troughid FROM troughinfo")  #fetch all the local trough information
+		lresult = localc.fetchall()
+
+		for lrow in lresult:
+			count = 0
+			for row in result:
+				if lrow[0] == row[0]: #if there is trough which is in both server and local database then this condition will be true.
+					count += 1
+			if count == 0:  #if there is some row in local database wich does not exists in server database then count will be zero then remove the entry from local database
+				localc.execute("DELETE FROM troughinfo WHERE troughid = %s", (lrow[0]))
+				removed += 1
+
+		localdb.commit()
+		lcd.clear()
+		lcd.string("      Success", LINE_2)
+		if updated > 0:
+			msg = str(updated)
+			msg += " trough id updated"
+			lcd.string(msg, LINE_3)
+			time.sleep(3)
+		if removed > 0:
+			msg = str(removed)
+			msg += " trough id removed"
+			lcd.string(msg, LINE_3)
+			time.sleep(3)
+		serverdb.close()
+		localdb.close()
+	except:
+		#localdb.rollback()
+		lcd.clear()
+		lcd.string("      Failed to", LINE_2)
+		lcd.string("   fetch troughinfo", LINE_3)
+		time.sleep(3)
 
 '''
 *
 * Function Name: 	fetchCropInfoFromServer
-* Input: 		none
-* Output: 		none
-* Logic: 		fetches the newly added or removed crop from server database
+* Input: 				none
+* Output: 			none
+* Logic: 				fetches the newly added or removed crop from server database
 * Example Call:		fetchCropInfoFromServer()
 *
 '''
@@ -418,9 +632,9 @@ def fetchCropInfoFromServer():
 '''
 *
 * Function Name: 	init
-* Input: 		none
-* Output: 		none
-* Logic: 		calculates the baseValue of load cell and fetches the crop info from the server database
+* Input: 				none
+* Output: 			none
+* Logic: 				calculates the baseValue of load cell and fetches the crop info from the server database
 * Example Call:		init()
 *
 '''
@@ -436,7 +650,7 @@ def init():
 	lcd.string("   Please wait...", LINE_2)
 	baseValue = lc.base_value()
 	fetchCropInfoFromServer()
-	#os.system("sudo python /home/pi/Desktop/both/fetchcropinfo.py")
+	fetchTroughInfoFromServer()
 
 try :
 	init()
@@ -468,7 +682,7 @@ try :
 				active = 0
 				GPIO.cleanup()
 				sys.stdout.flush()
-				os.execl('/home/pi/Desktop/both/startup.sh', '')
+				os.execl('/home/pi/Desktop/Final/startup.sh', '')
 				break
 			elif key == 'C':
 				lcd.clear()
@@ -479,10 +693,12 @@ try :
 				os.system("sudo reboot")
 				break
 		if active:
-			acceptTroughID()
-			if troughIDExcepted:
-				acceptCropID()
+			acceptCropID()
 			if cropIDExcepted:
+				acceptTroughID()
+			if troughIDExcepted:
+				acceptLocationID()
+			if locationIDExcepted:
 				takePicture()
 			if pictureTaken:
 				storeData()
