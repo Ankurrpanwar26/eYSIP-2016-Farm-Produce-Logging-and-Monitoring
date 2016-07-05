@@ -4,4 +4,6 @@
  **Final:** This folder contains all the final and documented code
  
  **tests:** This folder contains all the programs file which is used to test the different component
+ 
+ **shop:** Contains all the files related to opencart website
 
