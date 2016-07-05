@@ -3,7 +3,7 @@
 * Project: 	   		Farm Produce: Logging and Monitoring
 * Author: 			Bhavesh Jadav
 * Filename:    		main.py
-* Functions: 		init()
+* Functions: 			init()
 *					tare()
 *					calculateWeight()
 *					displayWeight()
@@ -82,9 +82,9 @@ lcd.lcd_init()
 '''
 *
 * Function Name: 	calculateWeight
-* Input: 			none
+* Input: 				none
 * Output: 			returns the calculated weight from the load cell value
-* Logic: 			1) take the reading from load cell
+* Logic: 				1) take the reading from load cell
 *					2) take the difference between current value and base value
 *					3) divide the difference with diference got with known weight
 *					4) finally multiply the division answer with known weight value to get the weight
@@ -108,9 +108,9 @@ def caculateWeight():
 '''
 *
 * Function Name: 	displayWeight
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			it displays weight on the lcd screen by using calculateWeight function
+* Logic: 				it displays weight on the lcd screen by using calculateWeight function
 * Example Call:		displayWeight()
 *
 '''
@@ -131,9 +131,9 @@ def displayWeight() :
 '''
 *
 * Function Name: 	tare
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			takes the current weight of the object and stores it in variable then it will be subtracted form current weight value
+* Logic: 				takes the current weight of the object and stores it in variable then it will be subtracted form current weight value
 * Example Call:		tare()
 *
 '''
@@ -150,9 +150,9 @@ def tare():
 '''
 *
 * Function Name: 	takePicture
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			takes picture using USB camera using fscam program
+* Logic: 				takes picture using USB camera using fscam program
 * Example Call:		takePicture()
 *
 '''
@@ -160,7 +160,6 @@ def takePicture():
 	"fucntion to take picture using USB camera"
 	global imgName
 	global pictureTaken
-	#lcd.clear()
 	lcd.string("Taking picture...", LINE_2)
 	if os.path.exists('/dev/video0'):
 		#create image file name with current date
@@ -178,16 +177,15 @@ def takePicture():
 '''
 *
 * Function Name: 	storeData
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			stores the data into local database
+* Logic: 				stores the data into local database
 * Example Call:		storeData()
 *
 '''
 def storeData():
 	"fuction to store data in database"
 	global imgName
-	#lcd.clear()
 	lcd.string("Storing data...", LINE_3)
 	try:
 		#create instance of a database with host, username, password and database name
@@ -214,9 +212,9 @@ def storeData():
 '''
 *
 * Function Name: 	fetchCropInfo
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			fetches the crop name and id from local database
+* Logic: 				fetches the crop name and id from local database
 * Example Call:		fetchCropInfo()
 *
 '''
@@ -262,9 +260,9 @@ def fetchCropInfo():
 '''
 *
 * Function Name: 	acceptCropID
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			accepts crop ID from user using keypad
+* Logic: 				accepts crop ID from user using keypad
 * Example Call:		acceptCropID()
 *
 '''
@@ -308,9 +306,9 @@ def acceptCropID():
 '''
 *
 * Function Name: 	fetchLocationInfo
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			fetches the location name and id from local database
+* Logic: 				fetches the location name and id from local database
 * Example Call:		fetchLocationInfo()
 *
 '''
@@ -321,7 +319,7 @@ def fetchLocationInfo():
 	global locationIDExcepted
 	try:
 		lcd.clear()
-		lcd.string("Fetching location info...", LINE_1)
+		lcd.string("Fetching location...", LINE_1)
 		#create instance of a database with host, username, password and database name
 		db = sqldb.connect("localhost", "root", "firebird", "maindb")
 		#create cursor object
@@ -358,9 +356,9 @@ def fetchLocationInfo():
 '''
 *
 * Function Name: 	acceptLocationID
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			accepts location ID from user using keypad
+* Logic: 				accepts location ID from user using keypad
 * Example Call:		acceptLocationID()
 *
 '''
@@ -404,9 +402,9 @@ def acceptLocationID():
 '''
 *
 * Function Name: 	fetchTroughInfo
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			fetches the trough name and id from local database
+* Logic: 				fetches the trough name and id from local database
 * Example Call:		fetchTroughInfo()
 *
 '''
@@ -416,7 +414,7 @@ def fetchTroughInfo():
 	global troughIDExcepted
 	try:
 		lcd.clear()
-		lcd.string("Fetching trough info...", LINE_1)
+		lcd.string("Fetching trough id...", LINE_1)
 		#create instance of a database with host, username, password and database name
 		db = sqldb.connect("localhost", "root", "firebird", "maindb")
 		#create cursor object
@@ -448,9 +446,9 @@ def fetchTroughInfo():
 '''
 *
 * Function Name: 	acceptTroughID
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			accepts trough ID from user using keypad
+* Logic: 				accepts trough ID from user using keypad
 * Example Call:		acceptTroughID()
 *
 '''
@@ -494,9 +492,9 @@ def acceptTroughID():
 '''
 *
 * Function Name: 	fetchTroughInfoFromServer
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			fetches newly added or removed trough info from server database
+* Logic: 				fetches newly added or removed trough info from server database
 * Example Call:		fetchTroughInfoFromServer()
 *
 '''
@@ -561,10 +559,78 @@ def fetchTroughInfoFromServer():
 
 '''
 *
-* Function Name: 	fetchCropInfoFromServer
-* Input: 			none
+* Function Name: 	fetchLocationInfoFromServer
+* Input: 				none
 * Output: 			none
-* Logic: 			fetches the newly added or removed crop from server database
+* Logic: 				fetches the newly added or removed location from server database
+* Example Call:		fetchLocationInfoFromServer()
+*
+'''
+def fetchLocationInfoFromServer():
+	"fetch newly added locationinfo such as id and locationname from the server"
+	updated = 0
+	removed = 0
+	lcd.clear()
+	lcd.string("      Welcome", LINE_1)
+	lcd.string("Fetching locationinfo...", LINE_2)
+	try:
+		lcd.string("Connect to database", LINE_3)
+		#connect to server database to fetch information
+		serverdb = sqldb.connect(host = server, user = "bhavesh", passwd = "123456789", db = "opencart", connect_timeout = 5)
+		#connect to local databse to store fetched information
+		localdb = sqldb.connect("localhost", "root", "firebird", "maindb")
+		serverc = serverdb.cursor()
+		localc = localdb.cursor()
+		lcd.string("     Connected", LINE_4)
+		serverc.execute("SELECT * FROM locationinfo")
+		result = serverc.fetchall()  #fetch all location information form server database
+		for row in result:
+			localc.execute("SELECT * FROM locationinfo WHERE locationid = %s", (row[0]))  #fetch the location info from local database with selected server location id
+			count = localc.fetchall()
+			if len(count) == 0:  #if location does not exists in the server then count will be zero so add it in local database
+				localc.execute("INSERT INTO locationinfo(locationid, locationname) VALUES (%s, %s)", (row[0], row[1]))
+				updated += 1
+
+		localc.execute( "SELECT locationid FROM locationinfo")  #fetch all the local location information
+		lresult = localc.fetchall()
+
+		for lrow in lresult:
+			count = 0
+			for row in result:
+				if lrow[0] == row[0]: #if there is location which is in both server and local database then this condition will be true.
+					count += 1
+			if count == 0:  #if there is some row in local database wich does not exists in server database then count will be zero then remove the entry from local database
+				localc.execute("DELETE FROM locationinfo WHERE locationid = %s", (lrow[0]))
+				removed += 1
+
+		localdb.commit()
+		lcd.clear()
+		lcd.string("      Success", LINE_2)
+		if updated > 0:
+			msg = str(updated)
+			msg += " location updated"
+			lcd.string(msg, LINE_3)
+			time.sleep(3)
+		if removed > 0:
+			msg = str(removed)
+			msg += " location removed"
+			lcd.string(msg, LINE_3)
+			time.sleep(3)
+		serverdb.close()
+		localdb.close()
+	except:
+		#localdb.rollback()
+		lcd.clear()
+		lcd.string("      Failed to", LINE_2)
+		lcd.string("   fetch locationinfo", LINE_3)
+		time.sleep(3)
+
+'''
+*
+* Function Name: 	fetchCropInfoFromServer
+* Input: 				none
+* Output: 			none
+* Logic: 				fetches the newly added or removed crop from server database
 * Example Call:		fetchCropInfoFromServer()
 *
 '''
@@ -632,9 +698,9 @@ def fetchCropInfoFromServer():
 '''
 *
 * Function Name: 	init
-* Input: 			none
+* Input: 				none
 * Output: 			none
-* Logic: 			calculates the baseValue of load cell and fetches the crop info from the server database
+* Logic: 				calculates the baseValue of load cell and fetches the crop info from the server database
 * Example Call:		init()
 *
 '''
@@ -651,6 +717,7 @@ def init():
 	baseValue = lc.base_value()
 	fetchCropInfoFromServer()
 	fetchTroughInfoFromServer()
+	fetchLocationInfoFromServer()
 
 try :
 	init()
