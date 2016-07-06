@@ -7,3 +7,4 @@
  
  **shop:** Contains all the files related to opencart website
 
+ **Weighing Machine Design:** Contains all the solidworks cad file for design of our weighing platform. It also contains DXF files for laser cutting parts inside lasercut folder.
